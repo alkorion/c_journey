@@ -28,14 +28,18 @@ main() {
             if (state == IN) {
                 /* if word ended, state=out and store word length */
                 state = OUT;
-                if (wl >= '0' && wl  <= '9')
-                    ++ndigitsw[wl-'1'];
+                if (wl > 1 && wl < 10) {
+                    ++ndigitsw[wl-1];
+                    wl = 0; /* reset word length */
+                }
                 /* words longer than 10 char are stored in final bin */
-                else if (wl > '10') 
-                    ++ndigitsw['10'];
+                else if (wl >= 10) {
+                    ++ndigitsw[9];
+                    wl = 0; /* reset word length */
+                }
             }
         }
-        /* increment word-length counter while iterating through word */
+        /* increment wl counter while iterating through word */
         else {
             if (state == IN)
                 ++wl;
@@ -46,16 +50,21 @@ main() {
             }
         }
     }
+    /*
     printf("digits = ");
     for (int i = 0; i < 10; ++i) {
-        printf("%d", ndigitsw[1]);
+        printf("%d", ndigitsw[i]);
     }
     printf("\n");
-    /*
+    */
     for (int i=0; i<9; ++i) {
         printf("%d\t", (i+1));
         for (int j=0; j < ndigitsw[i]; ++j)
             printf("+");
-        printf('\n');
-    } */
+        printf("\n");
+    }
+    printf("10+\t");
+    for (int j=0; j < ndigitsw[9]; ++j)
+        printf("+");
+    printf("\n");
 }
