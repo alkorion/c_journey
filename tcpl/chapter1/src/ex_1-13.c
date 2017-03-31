@@ -22,7 +22,7 @@ main() {
     }
     
     state = OUT;
-    while ((c = getchar()) != EOF) {
+    while ((c=gethchar()) != EOF) {
         /* check if end of word char */
         if (c==' ' || c=='\n' || c=='\t') {
             if (state == IN) {
@@ -50,19 +50,16 @@ main() {
             }
         }
     }
-    /*
-    printf("digits = ");
-    for (int i = 0; i < 10; ++i) {
-        printf("%d", ndigitsw[i]);
-    }
-    printf("\n");
-    */
+    /* loop through word-length array and print '+'s for every value */
     for (int i=0; i<9; ++i) {
+        /* print labels 1-9 of historgram */
         printf("%d\t", (i+1));
         for (int j=0; j < ndigitsw[i]; ++j)
             printf("+");
         printf("\n");
     }
+    /* edge case print statement for final value, this final array 
+     * value counts instances of words with >= 10 chars */
     printf("10+\t");
     for (int j=0; j < ndigitsw[9]; ++j)
         printf("+");
