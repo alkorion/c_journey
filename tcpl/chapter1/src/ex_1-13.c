@@ -22,7 +22,7 @@ main() {
     }
     
     state = OUT;
-    while ((c=gethchar()) != EOF) {
+    while ((c = gethchar()) != EOF) {
         /* check if end of word char */
         if (c==' ' || c=='\n' || c=='\t') {
             if (state == IN) {
