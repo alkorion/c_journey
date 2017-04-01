@@ -22,13 +22,13 @@ main() {
     }
     
     state = OUT;
-    while ((c = gethchar()) != EOF) {
+    while ((c = getchar()) != EOF) {
         /* check if end of word char */
         if (c==' ' || c=='\n' || c=='\t') {
             if (state == IN) {
                 /* if word ended, state=out and store word length */
                 state = OUT;
-                if (wl > 1 && wl < 10) {
+                if (wl >= 1 && wl < 10) {
                     ++ndigitsw[wl-1];
                     wl = 0; /* reset word length */
                 }
