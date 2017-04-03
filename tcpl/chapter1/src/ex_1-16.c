@@ -1,5 +1,5 @@
 /* Excercise 1-16
- * Longest Line Program Revision
+ * Longest Line Program Revision v2.0
  * Alessandro Lira
  *
  * Reads input and prints the longest line
@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-#define MAXLINE 1000   /* maximum input line length */
+#define MAXLINE 100   /* max input line length that will be stored */
 
 int getLine(char line[], int maxline);
 void copy(char to[], char from[]);
@@ -26,7 +26,10 @@ main() {
             copy(longest, line);
         }
     if (max > 0)  /*therewasaline*/ 
-        printf("%s", longest); 
+        /* print lenght of longest line found */
+        printf("Longeset string had %d chars\n", max);
+        printf("Longest line was as follows (up to %d chars):\n%s\n",
+                MAXLINE, longest); 
     return 0;
 }
 
@@ -37,16 +40,17 @@ main() {
  */
 
 int getLine(char s[],int lim) {
-    int c, i;
- 
-    for (i=0; i < lim-1 && (c=getchar())!=EOF && c!='\n'; ++i)
-        s[i] = c;
+    int c, i, len;
+    
+    for (i=0, len=0; (c=getchar())!=EOF && c!='\n'; ++len) {
+        if (i < lim-1) 
+            s[i++] = c;
+    }
     if (c == '\n') {
-         s[i] = c;
-         ++i;
+         s[i++] = c;
     }
     s[i] = '\0';
-    return i; 
+    return len; 
 }
 
 /* copy:  copy 'from' into 'to'; assume to is big enough */
