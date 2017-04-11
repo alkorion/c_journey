@@ -27,6 +27,7 @@ main() {
         printf(line);
     }
 
+    return 0;
 }
 
 /* getLine:  read a line into s, return length  */
@@ -46,7 +47,7 @@ int getLine(char s[]) {
 int insert_tab(char line[], int index) {
     int i, c, len;
 
-    for (i = 0; c = line[i] != '\0'; i++)     /* get array length */ 
+    for (i = 0; (c = line[i]) != '\0'; i++)     /* get array length */ 
         len++;
     len = (len + TABSIZE-1);
     printf("array length was found to be: %d\n", len);
