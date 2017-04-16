@@ -8,7 +8,7 @@
 #include<stdio.h>
 
 #define MAXLINE     1000    /* max array length for program */
-#define TABSIZE     4       /* number of spaces in a tab */
+#define TABSIZE     8       /* number of spaces in a tab */
 
 int getLine(char line[]);
 int insert_tab(char line[], int index);
@@ -45,21 +45,24 @@ int getLine(char s[]) {
  * array length
  * note: array size increases (TABSIZE-1) */
 int insert_tab(char line[], int index) {
-    int i, c, len;
+    int i, c;
+    int old_len, new_len;   /* store previous and new array length */
+    int buffer;             /* number of spaces to next tab-stop */
 
-    for (i = 0; (c = line[i]) != '\0'; i++)     /* get array length */ 
-        len++;
-    len = (len + TABSIZE-1);
-    printf("array length was found to be: %d\n", len);
+    buffer = TABSIZE - (index%TABSIZE); /* calc # of blanks to insert */
 
-    for (i = len-1; i > (index + TABSIZE-1); i--) {
-        line[i + TABSIZE-1] = line[i];    /* save values further ahead in 
-                                           order to make space for tab */
-    } 
-    /* place blank chars where '\t' was to create new 'tab' */
-    for (i = index; i < index + TABSIZE-1; i++)
+    for (i = 0; (c = line[i]) != '\0'; i++)     /* get old array length */ 
+        old_len++;
+
+    new_len = (old_len + buffer) - 1; 
+    
+    /* store all values after tab at the new end of the array */
+    for (i = new_len; i >= (index + buffer); i--) 
+        line[i] = line[i-buffer+1];
+        
+    /* place blank chars where '\t' was to create new "tab" */
+    for (i = index; i < index + buffer; i++)
         line[i] = ' ';
 
-    line[len + TABSIZE-1]='\0'; /* replace endline char at end */
-    return (len + TABSIZE-1);       /* return new array size */       
+    return new_len;       /* return new array size */       
 }
