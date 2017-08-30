@@ -18,7 +18,9 @@ int getLine(char line[]);
     
 
 main() {
-    int i, c;
+    int i;
+    char c;
+    
     FILE *pointer_file;
     char buffer[MAXLINE];
 
@@ -30,7 +32,15 @@ main() {
     while (fgets(buffer, MAXLINE, pointer_file) != NULL) {
         if (line_number % 2 == 0) { /* if its the square size input */
             square_size = atoi(buffer);
-            printf("%d\n",square_size);
+        }
+        else {
+            for (i=0; c=buffer[i] != "\n"; i++) {
+                /* Sudo code time:
+                 * load latin-square values into a new array
+                 * clean array to only have int vals (prune blanks)
+                 * call functon which take single latin square inputs
+                 */
+            }
         }
         line_number++;
     }    
@@ -39,3 +49,5 @@ main() {
 
     return 0;
 }
+
+bool is_latin_square()
