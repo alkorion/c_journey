@@ -8,6 +8,7 @@
 
 #include<stdio.h>
 #include<unistd.h>
+#include<stdlib.h>
 
 #define MAXLINE         1000    /* max array length for program */
 #define MAX_ARRAY_SIZE  32      /* max value N for input of array */
@@ -28,8 +29,10 @@ main() {
 
     while (fgets(buffer, MAXLINE, pointer_file) != NULL) {
         if (line_number % 2 == 0) { /* if its the square size input */
-            square_size = buffer[0]
-
+            square_size = atoi(buffer);
+            printf("%d\n",square_size);
+        }
+        line_number++;
     }    
 
     fclose(pointer_file);
